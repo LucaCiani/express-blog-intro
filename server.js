@@ -6,8 +6,51 @@
 
 const express = require("express");
 const app = express();
-const port = 3000;
+const port = 3030;
 
 app.listen(port, () => {
     console.log(`Server del mio blog in ascolto su http://localhost:${port}`);
+});
+
+app.use(express.static("public"));
+
+app.get("/", (req, res) => {
+    res.send("Server del mio blog");
+});
+
+const posts = [
+    {
+        title: "Ciambellone",
+        content: "Ciambellone semplice e veloce",
+        image: "/ciambellone.jpeg",
+        tags: ["tag1", "tag2"],
+    },
+    {
+        title: "Crackers alla barbabietola",
+        content: "Crackers alla barbabietola",
+        image: "/cracker_barbabietola.jpeg",
+        tags: ["tag2", "tag3"],
+    },
+    {
+        title: "Pane fritto dolce",
+        content: "Pane fritto dolce",
+        image: "/pane_fritto_dolce.jpeg",
+        tags: ["tag1", "tag3"],
+    },
+    {
+        title: "Pasta alla barbabietola",
+        content: "Pasta alla barbabietola",
+        image: "/pasta_barbabietola.jpeg",
+        tags: ["tag2", "tag4"],
+    },
+    {
+        title: "Torta paesana",
+        content: "Torta paesana",
+        image: "/torta_paesana.jpeg",
+        tags: ["tag1", "tag4"],
+    },
+];
+
+app.get("/api/posts", (req, res) => {
+    res.json(posts);
 });
